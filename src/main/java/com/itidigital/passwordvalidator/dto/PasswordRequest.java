@@ -1,4 +1,4 @@
-package com.itidigital.passwordvalidator.request;
+package com.itidigital.passwordvalidator.dto;
 
 import lombok.Getter;
 import lombok.Setter;
