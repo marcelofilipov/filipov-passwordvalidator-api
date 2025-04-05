@@ -1,4 +1,4 @@
-package com.itidigital.passwordvalidator.service;
+package com.filipov.passwordvalidator.service;
 
 import org.springframework.stereotype.Service;
 

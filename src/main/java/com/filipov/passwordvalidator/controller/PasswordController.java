@@ -1,8 +1,8 @@
-package com.itidigital.passwordvalidator.controller;
+package com.filipov.passwordvalidator.controller;
 
-import com.itidigital.passwordvalidator.dto.PasswordRequest;
-import com.itidigital.passwordvalidator.dto.PasswordResponse;
-import com.itidigital.passwordvalidator.service.PasswordValidatorServiceImpl;
+import com.filipov.passwordvalidator.dto.PasswordRequest;
+import com.filipov.passwordvalidator.dto.PasswordResponse;
+import com.filipov.passwordvalidator.service.PasswordValidatorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

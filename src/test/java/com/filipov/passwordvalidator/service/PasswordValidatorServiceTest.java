@@ -1,4 +1,4 @@
-package com.itidigital.passwordvalidator.service;
+package com.filipov.passwordvalidator.service;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

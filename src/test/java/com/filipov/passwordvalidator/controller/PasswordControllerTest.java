@@ -1,7 +1,7 @@
-package com.itidigital.passwordvalidator.controller;
+package com.filipov.passwordvalidator.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.itidigital.passwordvalidator.dto.PasswordRequest;
+import com.filipov.passwordvalidator.dto.PasswordRequest;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
