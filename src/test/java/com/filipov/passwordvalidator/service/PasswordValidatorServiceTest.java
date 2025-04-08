@@ -73,4 +73,14 @@ class PasswordValidatorServiceTest {
         assertFalse(validator.validate("AbTp!fokX"));
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {
+            "AbTp9!fok", "AbTp9@fok", "AbTp9#fok", "AbTp9$fok",
+            "AbTp9%fok", "AbTp9^fok", "AbTp9&fok", "AbTp9*fok",
+            "AbTp9(fok", "AbTp9)fok", "AbTp9-fok", "AbTp9+fok"
+    })
+    void deveValidarSenhasComTodosCaracteresEspeciais(String password) {
+        assertTrue(validator.validate(password));
+    }
+
 }

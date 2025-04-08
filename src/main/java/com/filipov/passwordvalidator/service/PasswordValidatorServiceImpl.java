@@ -9,37 +9,39 @@ import java.util.Set;
 public class PasswordValidatorServiceImpl implements PasswordValidatorService {
 
     private static final String SPECIAL_CHARACTERS = "!@#$%^&*()-+";
+    private static final int MIN_PASSWORD_LENGTH = 9;
 
     @Override
     public boolean validate(String password) {
-        if (isInvalidLength(password) || containsWhitespace(password) || hasDuplicateChars(password)) {
-            return false;
-        }
-
-        return hasRequiredCharacters(password);
+        return isStructureValid(password) && hasRequiredCharacterTypes(password);
     }
 
-    private boolean isInvalidLength(String password) {
-        return password == null || password.isBlank() || password.length() < 9;
+    private boolean isStructureValid(String password) {
+        return isLengthValid(password)
+                && doesNotContainWhitespace(password)
+                && hasNoRepeatedCharacters(password);
     }
 
-    private boolean hasDuplicateChars(String password) {
-        Set<Character> uniqueChars = new HashSet<>();
-        for (char ch : password.toCharArray()) {
-            if (!uniqueChars.add(ch)) {
-                return true; // Encontrou caractere repetido
-            }
-        }
-        return false;
+    private boolean isLengthValid(String password) {
+        return password != null && !password.isBlank() && password.length() >= MIN_PASSWORD_LENGTH;
     }
 
-    private boolean hasRequiredCharacters(String password) {
+    private boolean doesNotContainWhitespace(String password) {
+        return password.chars().noneMatch(Character::isWhitespace);
+    }
+
+    private boolean hasNoRepeatedCharacters(String password) {
+        Set<Integer> uniqueChars = new HashSet<>();
+        return password.codePoints().allMatch(uniqueChars::add);
+    }
+
+    private boolean hasRequiredCharacterTypes(String password) {
         var hasDigit = false;
         var hasLower = false;
         var hasUpper = false;
         var hasSpecial = false;
 
-        for (char ch : password.toCharArray()) {
+        for (int ch : password.codePoints().toArray()) {
             if (Character.isDigit(ch)) hasDigit = true;
             else if (Character.isLowerCase(ch)) hasLower = true;
             else if (Character.isUpperCase(ch)) hasUpper = true;
@@ -47,10 +49,6 @@ public class PasswordValidatorServiceImpl implements PasswordValidatorService {
         }
 
         return hasDigit && hasLower && hasUpper && hasSpecial;
-    }
-
-    private boolean containsWhitespace(String password) {
-        return password.contains(" ");
     }
 
 }

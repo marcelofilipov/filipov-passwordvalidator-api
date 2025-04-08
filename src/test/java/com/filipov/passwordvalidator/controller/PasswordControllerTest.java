@@ -29,7 +29,7 @@ class PasswordControllerTest {
 
     @Test
     void deveRetornarTrueParaSenhaValida() throws Exception {
-        mockMvc.perform(post("/validate-password")
+        mockMvc.perform(post("/passwords/validate")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toJson("AbTp9!fok")))
                 .andExpect(status().isOk())
@@ -38,7 +38,7 @@ class PasswordControllerTest {
 
     @Test
     void deveRetornarFalseParaSenhaComCaracteresRepetidos() throws Exception {
-        mockMvc.perform(post("/validate-password")
+        mockMvc.perform(post("/passwords/validate")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toJson("AbTp9!foA")))
                 .andExpect(status().isOk())
@@ -47,7 +47,7 @@ class PasswordControllerTest {
 
     @Test
     void deveRetornarFalseParaSenhaVazia() throws Exception {
-        mockMvc.perform(post("/validate-password")
+        mockMvc.perform(post("/passwords/validate")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toJson("")))
                 .andExpect(status().isOk())
@@ -56,7 +56,7 @@ class PasswordControllerTest {
 
     @Test
     void deveRetornarFalseParaSenhaComEspaco() throws Exception {
-        mockMvc.perform(post("/validate-password")
+        mockMvc.perform(post("/passwords/validate")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toJson(" ")))
                 .andExpect(status().isOk())
