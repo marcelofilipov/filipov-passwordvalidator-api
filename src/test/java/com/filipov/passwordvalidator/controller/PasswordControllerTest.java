@@ -24,9 +24,7 @@ class PasswordControllerTest {
     private ObjectMapper objectMapper;
 
     private String toJson(String passwordInput) throws Exception {
-        PasswordRequest request = new PasswordRequest();
-        request.setPasswordInput(passwordInput);
-        return objectMapper.writeValueAsString(request);
+        return objectMapper.writeValueAsString(new PasswordRequest(passwordInput));
     }
 
     @Test
@@ -35,7 +33,7 @@ class PasswordControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toJson("AbTp9!fok")))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.valid").value(true));
+                .andExpect(jsonPath("$.isValid").value(true));
     }
 
     @Test
@@ -44,7 +42,7 @@ class PasswordControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toJson("AbTp9!foA")))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.valid").value(false));
+                .andExpect(jsonPath("$.isValid").value(false));
     }
 
     @Test
@@ -53,7 +51,7 @@ class PasswordControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toJson("")))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.valid").value(false));
+                .andExpect(jsonPath("$.isValid").value(false));
     }
 
     @Test
@@ -62,7 +60,7 @@ class PasswordControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(toJson(" ")))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.valid").value(false));
+                .andExpect(jsonPath("$.isValid").value(false));
     }
 
 }

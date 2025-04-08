@@ -22,7 +22,7 @@ public class PasswordController {
 
     @PostMapping
     public PasswordResponse validatePassword(@RequestBody PasswordRequest request) {
-        boolean isValid = validatorService.validate(request.getPasswordInput());
+        boolean isValid = validatorService.validate(request.passwordInput());
         return new PasswordResponse(isValid);
     }
 }
